@@ -25,4 +25,4 @@ scrape_configs:
     #  insecure_skip_verify: true
     static_configs:
       - targets:
-        - 'vmi1187507-app:80'
+        - 'discourse_app:80'
