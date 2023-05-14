@@ -1,0 +1,77 @@
+version: "3"
+
+services:
+    cadvisor:
+        image: gcr.io/cadvisor/cadvisor:latest
+        container_name: cadvisor
+        restart: unless-stopped
+        volumes:
+            - /:/rootfs:ro
+            - /var/run:/var/run:rw
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+            - /dev/disk/:/dev/disk:ro
+        networks:
+            - prometheus-cadvisor
+
+    node_exporter:
+        image: quay.io/prometheus/node-exporter:latest
+        container_name: node_exporter
+        command:
+            - --path.rootfs=/host
+        pid: host
+        restart: unless-stopped
+        volumes:
+            - /:/host:ro,rslave
+        networks:
+            - prometheus-node_exporter
+
+    prometheus:
+        depends_on:
+            - cadvisor
+            - node_exporter
+        image: prom/prometheus:latest
+        restart: unless-stopped
+        container_name: prometheus
+        volumes:
+            - ./prometheus:/app.cfg
+        networks:
+            - world
+            - prometheus-cadvisor
+            - prometheus-node_exporter
+            - discourse
+            - grafana-prometheus
+        command: >-
+            --config.file=/app.cfg/prometheus.yaml
+            --storage.tsdb.path=/prometheus
+            --web.console.libraries=/usr/share/prometheus/console_libraries
+            --web.console.templates=/usr/share/prometheus/consoles
+
+    grafana:
+        depends_on:
+            - prometheus
+        image: grafana/grafana:latest
+        container_name: grafana
+        restart: unless-stopped
+        ports:
+            - 8443:3000
+        environment:
+            GF_SECURITY_ADMIN_USER: ADMIN_USER_PLACEHOLDER
+            GF_SECURITY_ADMIN_PASSWORD: ADMIN_PASS_PLACEHOLDER
+        volumes:
+            - ./grafana:/etc/grafana
+        networks:
+            - world
+            - grafana-prometheus
+            - discourse
+
+networks:
+    world:
+    grafana-prometheus:
+        internal: true
+    prometheus-cadvisor:
+        internal: true
+    prometheus-node_exporter:
+        internal: true
+    discourse:
+        external: true
