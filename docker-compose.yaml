@@ -37,21 +37,34 @@ services:
         networks:
             - prometheus-node_exporter
 
+    discourse_forward_proxy:
+        image: nginx:latest
+        container_name: discourse_forward_proxy
+        restart: unless-stopped
+        volumes:
+            - ./discourse_forward_proxy/:/etc/nginx/conf.d
+        networks:
+            - prometheus-discourse_forward_proxy
+            - discourse
+
     prometheus:
         depends_on:
             - cadvisor
             - node_exporter
+            - discourse_forward_proxy
         image: prom/prometheus:latest
         restart: unless-stopped
         container_name: prometheus
+        # uncomment only to access web interface for debug/testing
+        #ports:
+        #    - 9090:9090
         volumes:
             - ./prometheus:/app.cfg
         networks:
-            - world
             - prometheus-cadvisor
             - prometheus-docker_state_exporter
             - prometheus-node_exporter
-            - discourse
+            - prometheus-discourse_forward_proxy
             - grafana-prometheus
         command: >-
             --config.file=/app.cfg/prometheus.yaml
@@ -65,20 +78,19 @@ services:
         image: grafana/grafana:latest
         container_name: grafana
         restart: unless-stopped
-        ports:
-            - 8443:3000
         environment:
             GF_SECURITY_ADMIN_USER: ADMIN_USER_PLACEHOLDER
             GF_SECURITY_ADMIN_PASSWORD: ADMIN_PASS_PLACEHOLDER
+        ports:
+            # 8443 due to restriction on ports from cloudflare
+            - 8443:3000
         volumes:
             - ./grafana:/etc/grafana
         networks:
-            - world
             - grafana-prometheus
             - discourse
 
 networks:
-    world:
     grafana-prometheus:
         internal: true
     prometheus-cadvisor:
@@ -86,6 +98,8 @@ networks:
     prometheus-docker_state_exporter:
         internal: true
     prometheus-node_exporter:
+        internal: true
+    prometheus-discourse_forward_proxy:
         internal: true
     discourse:
         external: true

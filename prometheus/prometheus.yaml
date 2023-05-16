@@ -24,10 +24,8 @@ scrape_configs:
     static_configs:
       - targets:
         - 'node_exporter:9100'
-  - job_name: discourse_exporter
-    #scheme: https
-    #tls_config:
-    #  insecure_skip_verify: true
+  - job_name: discourse_exporter_proxy
+    scheme: http
     static_configs:
       - targets:
-        - 'discourse_app:80'
+        - 'discourse_forward_proxy:8080'
