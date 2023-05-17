@@ -1,0 +1,213 @@
+apiVersion: 1
+
+contactPoints:
+  - orgId: 1
+    name: Email Monitoring
+    receivers:
+    - uid: netgamers-gmail
+      type: email
+      settings:
+        addresses: ALERT_EMAIL_NOTIFICATION_PLACEHOLDER
+
+policies:
+  - orgId: 1
+    receiver: Email Monitoring
+    group_by: ['...']
+    group_wait: 5m
+    group_interval: 1h
+    repeat_interval: 12h
+
+groups:
+    - orgId: 1
+      name: 1m-eval
+      folder: Alerts
+      interval: 1m
+      rules:
+        - uid: discourse-running
+          title: Discourse Running
+          condition: threshold
+          data:
+            - refId: discourse uptime
+              relativeTimeRange:
+                from: 10800
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: builder
+                expr: sum by(name) (container_state_status{name="app"})
+                format: time_series
+                interval: ""
+                intervalMs: 15000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: true
+                refId: discourse uptime
+            - refId: last value
+              relativeTimeRange:
+                from: 10800
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: discourse uptime
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: last value
+                type: reduce
+            - refId: threshold
+              relativeTimeRange:
+                from: 10800
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: last value
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: threshold
+                type: threshold
+          dashboardUid: docker
+          panelId: 51
+          noDataState: NoData
+          execErrState: Error
+          for: 15m
+          annotations:
+            __dashboardUid__: docker
+            __panelId__: "51"
+            summary: Discourse is not running since 15 minutes
+          labels:
+            priority: "1"
+          isPaused: false
+        - uid: host-space-available
+          title: Host Space Available
+          condition: threshold
+          data:
+            - refId: available
+              relativeTimeRange:
+                from: 86400
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                expr: node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} * 100
+                format: time_series
+                hide: false
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                metric: ""
+                range: true
+                refId: available
+                step: 240
+            - refId: last value
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - D
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: available
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: last value
+                type: reduce
+            - refId: threshold
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 10
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - E
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: last value
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: threshold
+                type: threshold
+          dashboardUid: node-exporter-full
+          panelId: 43
+          noDataState: NoData
+          execErrState: Error
+          for: 12h
+          annotations:
+            __dashboardUid__: node-exporter-full
+            __panelId__: "43"
+            summary: Disk space available is less than 20%
+          labels:
+            priority: "2"
+          isPaused: false
