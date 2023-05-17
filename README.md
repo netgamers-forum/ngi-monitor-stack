@@ -24,6 +24,7 @@ Be aware that from this moment and on, any rebuild (to install plugins, updare d
 - Edit the `docker-compose.yaml` file then replace the `ADMIN_USER_PLACEHOLDER` and `ADMIN_PASS_PLACEHOLDER` to generate the correct credentials to access the dashboard
 - Edit the `docker-compose.yaml` file then replace the `A_VALID_PORT` with a valid https port for grafana that is not used already by the host
 - Edit `grafana/provisioning/alerting/alerting.yaml` with a valid email to receive the notification instead of `ALERT_EMAIL_NOTIFICATION_PLACEHOLDER`
+- Edit `grafana/provisioning/alerting/alerting.yaml` with a valid discord webhook to receive the notification instead of `DISCORD_WEBHOOK_PLACEHOLDER`
 
 
 ## Deploy

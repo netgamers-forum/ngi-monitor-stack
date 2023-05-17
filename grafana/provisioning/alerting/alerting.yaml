@@ -14,15 +14,29 @@ contactPoints:
       type: email
       settings:
         addresses: ALERT_EMAIL_NOTIFICATION_PLACEHOLDER
+  - orgId: 1
+    name: Discord Monitoring
+    receivers:
+    - uid: discord
+      type: discord
+      disableResolveMessage: false
+      settings:
+        url: DISCORD_WEBHOOK_PLACEHOLDER
+        use_discord_username: true
 
+# delivery policies
 policies:
   - orgId: 1
     receiver: Email Monitoring
-    group_by: ['...']
     group_wait: 5m
     group_interval: 1h
     repeat_interval: 12h
+    group_by:
+    - alertname
+    routes:
+    - receiver: Discord Monitoring
 
+# alert rules
 groups:
     - orgId: 1
       name: 1m-eval
