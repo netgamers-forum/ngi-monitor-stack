@@ -1,5 +1,11 @@
 apiVersion: 1
 
+# remove default contact point
+deleteContactPoints:
+- orgId: 1
+  name: email receiver
+
+# contact points
 contactPoints:
   - orgId: 1
     name: Email Monitoring
