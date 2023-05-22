@@ -231,3 +231,90 @@ groups:
           labels:
             priority: "2"
           isPaused: false
+        - uid: domain-uptime
+          title: Domain Uptime
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 1800
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: builder
+                expr: up{instance="https://netgamers.it"} * 100
+                format: time_series
+                interval: ""
+                intervalFactor: 2
+                intervalMs: 20000
+                legendFormat: __auto
+                maxDataPoints: 100
+                range: true
+                refId: A
+                step: 40
+                target: ""
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 100
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: a33e744a-5707-416d-972f-bf709d46ed22
+          panelId: 21
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          annotations:
+            __dashboardUid__: a33e744a-5707-416d-972f-bf709d46ed22
+            __panelId__: "21"
+            summary: "Netgamers.it is not up"
+          isPaused: false
