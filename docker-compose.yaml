@@ -37,6 +37,17 @@ services:
         networks:
             - prometheus-node_exporter
 
+    blackbox_exporter:
+        image: quay.io/prometheus/blackbox-exporter:latest
+        container_name: blackbox_exporter
+        command:
+            - --config.file=/config/blackbox.yaml
+        restart: unless-stopped
+        volumes:
+            - ./blackbox_exporter/:/config
+        networks:
+            - prometheus-blackbox_exporter
+
     discourse_forward_proxy:
         image: nginx:latest
         container_name: discourse_forward_proxy
@@ -64,6 +75,7 @@ services:
             - prometheus-cadvisor
             - prometheus-docker_state_exporter
             - prometheus-node_exporter
+            - prometheus-blackbox_exporter
             - prometheus-discourse_forward_proxy
             - grafana-prometheus
         command: >-
@@ -98,6 +110,8 @@ networks:
     prometheus-docker_state_exporter:
         internal: true
     prometheus-node_exporter:
+        internal: true
+    prometheus-blackbox_exporter:
         internal: true
     prometheus-discourse_forward_proxy:
         internal: true
