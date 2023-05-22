@@ -43,7 +43,7 @@ groups:
       folder: Alerts
       interval: 1m
       rules:
-        - uid: discourse-running
+        - uid: discourse-container-running
           title: Discourse Running
           condition: threshold
           data:
@@ -127,11 +127,11 @@ groups:
           panelId: 51
           noDataState: NoData
           execErrState: Error
-          for: 15m
+          for: 5m
           annotations:
             __dashboardUid__: docker
             __panelId__: "51"
-            summary: Discourse is not running since 15 minutes
+            summary: "Discourse container is not running"
           labels:
             priority: "1"
           isPaused: false
