@@ -114,7 +114,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "builder",
-          "expr": "sum by(name) (container_state_status) * 100",
+          "expr": "sum by(name) (container_state_status{status=\"running\"}) * 100",
           "format": "time_series",
           "legendFormat": "__auto",
           "range": true,
@@ -815,7 +815,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
