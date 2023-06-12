@@ -15,11 +15,10 @@
       }
     ]
   },
-  "description": "Official Dashboard Used by the Prometheus Discourse plugin",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": 3539,
   "graphTooltip": 0,
+  "id": 9,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -67,7 +66,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 15,
+      "id": 1,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -92,7 +91,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "count(discourse_rss{type='sidekiq',job='$site'})",
+          "expr": "count(discourse_rss{type='sidekiq'})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -149,89 +148,7 @@
         "x": 3,
         "y": 0
       },
-      "id": 16,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "expr": "count(discourse_rss{type='web',job='$site'})",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "",
-          "range": true,
-          "refId": "A",
-          "step": 40,
-          "target": ""
-        }
-      ],
-      "title": "Web Workers",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
-        "y": 0
-      },
-      "id": 17,
+      "id": 3,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -310,10 +227,10 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
+        "x": 6,
         "y": 0
       },
-      "id": 22,
+      "id": 4,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -349,6 +266,88 @@
         }
       ],
       "title": "Sidekiq Jobs / Hr",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 0
+      },
+      "id": 2,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "count(discourse_rss{type='web'})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "range": true,
+          "refId": "A",
+          "step": 40,
+          "target": ""
+        }
+      ],
+      "title": "Web Workers",
       "type": "stat"
     },
     {
@@ -444,7 +443,7 @@
         "x": 12,
         "y": 0
       },
-      "id": 21,
+      "id": 5,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -562,7 +561,7 @@
         "x": 16,
         "y": 0
       },
-      "id": 18,
+      "id": 6,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -664,7 +663,7 @@
         "x": 20,
         "y": 0
       },
-      "id": 23,
+      "id": 7,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -687,7 +686,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "discourse_redis_primary_available * 100",
+          "expr": "discourse_postgres_primary_available * 100",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Primary",
@@ -697,7 +696,7 @@
           "target": ""
         }
       ],
-      "title": "Redis Uptime",
+      "title": "PostgreSQL Uptime",
       "type": "timeseries"
     },
     {
@@ -718,7 +717,7 @@
         "y": 4
       },
       "hiddenSeries": false,
-      "id": 1,
+      "id": 8,
       "legend": {
         "avg": false,
         "current": false,
@@ -759,10 +758,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.5\",action=\"latest\",controller=\"list\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.5\",action=\"latest\",controller=\"list\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Total(ms)",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -772,10 +773,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.5\",action=\"latest\",controller=\"list\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.5\",action=\"latest\",controller=\"list\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Redis",
+          "range": true,
           "refId": "B",
           "step": 4
         },
@@ -784,10 +787,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.5\",action=\"latest\",controller=\"list\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.5\",action=\"latest\",controller=\"list\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "SQL",
+          "range": true,
           "refId": "C",
           "step": 4
         }
@@ -840,7 +845,7 @@
         "y": 4
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 9,
       "legend": {
         "avg": false,
         "current": false,
@@ -881,10 +886,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.5\",action=\"show\",controller=\"topics\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.5\",action=\"show\",controller=\"topics\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Total(ms)",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -894,10 +901,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.5\",action=\"show\",controller=\"topics\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.5\",action=\"show\",controller=\"topics\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Redis",
+          "range": true,
           "refId": "B",
           "step": 4
         },
@@ -906,10 +915,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.5\",action=\"show\",controller=\"topics\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.5\",action=\"show\",controller=\"topics\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "SQL",
+          "range": true,
           "refId": "C",
           "step": 4
         }
@@ -962,7 +973,7 @@
         "y": 11
       },
       "hiddenSeries": false,
-      "id": 3,
+      "id": 10,
       "legend": {
         "avg": false,
         "current": false,
@@ -1005,10 +1016,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.99\",action=\"latest\",controller=\"list\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.99\",action=\"latest\",controller=\"list\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Total(ms)",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -1018,10 +1031,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.99\",action=\"latest\",controller=\"list\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.99\",action=\"latest\",controller=\"list\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Redis",
+          "range": true,
           "refId": "B",
           "step": 4
         },
@@ -1030,10 +1045,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.99\",action=\"latest\",controller=\"list\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.99\",action=\"latest\",controller=\"list\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "SQL",
+          "range": true,
           "refId": "C",
           "step": 4
         }
@@ -1086,7 +1103,7 @@
         "y": 11
       },
       "hiddenSeries": false,
-      "id": 4,
+      "id": 11,
       "legend": {
         "avg": false,
         "current": false,
@@ -1127,10 +1144,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.99\",action=\"show\",controller=\"topics\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_duration_seconds{quantile=\"0.99\",action=\"show\",controller=\"topics\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Total(ms)",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -1140,10 +1159,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.99\",action=\"show\",controller=\"topics\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_redis_duration_seconds{quantile=\"0.99\",action=\"show\",controller=\"topics\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Redis",
+          "range": true,
           "refId": "B",
           "step": 4
         },
@@ -1152,10 +1173,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.99\",action=\"show\",controller=\"topics\",job=\"$site\"}) * 1000",
+          "editorMode": "code",
+          "expr": "avg(discourse_http_sql_duration_seconds{quantile=\"0.99\",action=\"show\",controller=\"topics\"}) * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "SQL",
+          "range": true,
           "refId": "C",
           "step": 4
         }
@@ -1251,7 +1274,7 @@
         "x": 0,
         "y": 18
       },
-      "id": 5,
+      "id": 12,
       "links": [],
       "options": {
         "legend": {
@@ -1347,7 +1370,7 @@
         "x": 12,
         "y": 18
       },
-      "id": 6,
+      "id": 13,
       "links": [],
       "options": {
         "legend": {
@@ -1400,7 +1423,7 @@
         "y": 25
       },
       "hiddenSeries": false,
-      "id": 7,
+      "id": 14,
       "legend": {
         "avg": false,
         "current": false,
@@ -1432,10 +1455,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(irate(discourse_page_views{job=\"$site\"}[5m])) by (type,device)",
+          "editorMode": "code",
+          "expr": "sum(irate(discourse_page_views[5m])) by (type,device)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - {{type}}",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -1489,7 +1514,7 @@
         "y": 25
       },
       "hiddenSeries": false,
-      "id": 8,
+      "id": 15,
       "legend": {
         "avg": false,
         "current": false,
@@ -1521,10 +1546,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(discourse_active_app_reqs{job=\"$site\"}) by (job)",
+          "editorMode": "code",
+          "expr": "sum(discourse_active_app_reqs) by (job)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Active Requests",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -1534,10 +1561,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(discourse_queued_app_reqs{job=\"$site\"}) by (job)",
+          "editorMode": "code",
+          "expr": "sum(discourse_queued_app_reqs) by (job)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Queued Requests",
+          "range": true,
           "refId": "B",
           "step": 4
         }
@@ -1590,7 +1619,7 @@
         "y": 32
       },
       "hiddenSeries": false,
-      "id": 9,
+      "id": 16,
       "legend": {
         "avg": false,
         "current": false,
@@ -1681,7 +1710,7 @@
         "y": 32
       },
       "hiddenSeries": false,
-      "id": 10,
+      "id": 17,
       "legend": {
         "avg": false,
         "current": false,
@@ -1773,7 +1802,7 @@
         "y": 39
       },
       "hiddenSeries": false,
-      "id": 11,
+      "id": 18,
       "legend": {
         "avg": false,
         "current": false,
@@ -1805,10 +1834,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(rate(discourse_total_allocated_objects{job=\"$site\"}[5m])) by(type,job)",
+          "editorMode": "code",
+          "expr": "sum(rate(discourse_total_allocated_objects[5m])) by(type,job)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{type}}",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -1862,7 +1893,7 @@
         "y": 39
       },
       "hiddenSeries": false,
-      "id": 12,
+      "id": 19,
       "legend": {
         "avg": false,
         "current": false,
@@ -1894,10 +1925,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "max(discourse_heap_live_slots{job=\"$site\",type=\"web\"}) by (type, instance)",
+          "editorMode": "code",
+          "expr": "max(discourse_heap_live_slots{type=\"web\"}) by (type, instance)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} max live",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -1907,10 +1940,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "min(discourse_heap_free_slots{job=\"$site\",type=\"web\"}) by (instance, type)",
+          "editorMode": "code",
+          "expr": "min(discourse_heap_free_slots{type=\"web\"}) by (instance, type)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} min free",
+          "range": true,
           "refId": "B",
           "step": 4
         }
@@ -1963,7 +1998,7 @@
         "y": 46
       },
       "hiddenSeries": false,
-      "id": 13,
+      "id": 20,
       "legend": {
         "avg": false,
         "current": false,
@@ -1995,10 +2030,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "max(discourse_rss{job=\"$site\"}) by (job,instance,type)",
+          "editorMode": "code",
+          "expr": "max(discourse_rss) by (job,instance,type)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{type}} {{instance}}",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -2053,7 +2090,7 @@
         "y": 46
       },
       "hiddenSeries": false,
-      "id": 14,
+      "id": 21,
       "legend": {
         "avg": false,
         "current": false,
@@ -2085,10 +2122,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "max(discourse_v8_used_heap_size{job=\"$site\"}) by (type, instance)",
+          "editorMode": "code",
+          "expr": "max(discourse_v8_used_heap_size) by (type, instance)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{type}} {{instance}}",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -2143,7 +2182,7 @@
         "y": 53
       },
       "hiddenSeries": false,
-      "id": 19,
+      "id": 22,
       "legend": {
         "avg": false,
         "current": false,
@@ -2175,10 +2214,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(rate(discourse_sidekiq_job_duration_seconds{job=\"$site\"}[5m])) by (job_name)",
+          "editorMode": "code",
+          "expr": "sum(rate(discourse_sidekiq_job_duration_seconds[5m])) by (job_name)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{job_name}}",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -2232,7 +2273,7 @@
         "y": 53
       },
       "hiddenSeries": false,
-      "id": 20,
+      "id": 23,
       "legend": {
         "avg": false,
         "current": false,
@@ -2264,10 +2305,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(rate(discourse_scheduled_job_duration_seconds{job=\"$site\"}[5m])) by (job_name)",
+          "editorMode": "code",
+          "expr": "sum(rate(discourse_scheduled_job_duration_seconds[5m])) by (job_name)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{job_name}}",
+          "range": true,
           "refId": "A",
           "step": 4,
           "target": ""
@@ -2309,67 +2352,16 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": false,
-          "text": "discourse_exporter_proxy",
-          "value": "discourse_exporter_proxy"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "definition": "",
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "name": "site",
-        "options": [],
-        "query": "label_values(discourse_page_views,job)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": []
   },
   "time": {
     "from": "now-6h",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
+  "timepicker": {},
   "timezone": "",
-  "title": "Discourse",
-  "uid": "a33e744a-5707-416d-972f-bf709d46ed22",
-  "version": 1,
+  "title": "Discourse Metrics",
+  "uid": "d865634b-0b72-4bb5-995e-a9b796ec42fe",
+  "version": 2,
   "weekStart": ""
 }
