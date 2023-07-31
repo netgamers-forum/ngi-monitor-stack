@@ -16,6 +16,27 @@ Docker Compose configuration to deploy a Grafana, Prometheus and various exporte
 
 Be aware that from this moment and on, any rebuild (to install plugins, updare discourse, etc) need to have those parameters added to prevent the discourse installation to revert to default values for network and hostname.
 
+To simplify the rebuild action a simple bash script can be created:
+
+```
+nano rebuild_discourse.sh
+```
+
+```
+# /bin/bash
+sudo /var/discourse/launcher rebuild app --docker-args '--network discourse --hostname=discourse_app'
+```
+
+`CTRL+X` -> `Y` -> `ENTER`
+
+Then 
+
+```
+chmod +x rebuild_discourse.sh
+```
+
+Simply run `./rebuild_discourse.sh` from now on to run the default rebuild but specifying the networking.
+
 ## Grafana Setup
 
 - If you are **not** deploying for the main domain, edit `grafana\grafana.ini` the attributes `root_url` and `domain` to match the actual domain you are working with.
