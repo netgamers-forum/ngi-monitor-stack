@@ -58,6 +58,15 @@ services:
             - prometheus-discourse_forward_proxy
             - discourse
 
+    postgresql_exporter:
+        image: prometheuscommunity/postgres_exporter
+        container_name: postgresql_exporter
+        environment:
+            DATA_SOURCE_NAME: "postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?sslmode=disable"
+        restart: unless-stopped
+        networks:
+            - prometheus-postgresql_exporter
+
     prometheus:
         depends_on:
             - cadvisor
@@ -78,6 +87,7 @@ services:
             - prometheus-node_exporter
             - prometheus-blackbox_exporter
             - prometheus-discourse_forward_proxy
+            - prometheus-postgresql_exporter
             - grafana-prometheus
         command: >-
             --config.file=/app.cfg/prometheus.yaml
@@ -116,6 +126,8 @@ networks:
     prometheus-blackbox_exporter:
         internal: true
     prometheus-discourse_forward_proxy:
+        internal: true
+    prometheus-postgresql_exporter:
         internal: true
     discourse:
         external: true
