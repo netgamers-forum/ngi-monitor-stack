@@ -71,6 +71,7 @@ services:
         #    - 9090:9090
         volumes:
             - ./prometheus:/app.cfg
+            - ./prometheus/data:/prometheus
         networks:
             - prometheus-cadvisor
             - prometheus-docker_state_exporter
