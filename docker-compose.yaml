@@ -58,15 +58,6 @@ services:
             - prometheus-discourse_forward_proxy
             - discourse
 
-    postgresql_exporter:
-        image: prometheuscommunity/postgres_exporter
-        container_name: postgresql_exporter
-        environment:
-            DATA_SOURCE_NAME: "postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?sslmode=disable"
-        restart: unless-stopped
-        networks:
-            - prometheus-postgresql_exporter
-
     prometheus:
         depends_on:
             - cadvisor
@@ -75,26 +66,26 @@ services:
         image: prom/prometheus:latest
         restart: unless-stopped
         container_name: prometheus
-        # uncomment only to access web interface for debug/testing
-        #ports:
-        #    - 9090:9090
+        ports:
+        #    - external:internal
+            - 9090:<CHOOSE A PORT>
         volumes:
             - ./prometheus:/app.cfg
             - ./prometheus/data:/prometheus
         networks:
+            - world
             - prometheus-cadvisor
             - prometheus-docker_state_exporter
             - prometheus-node_exporter
             - prometheus-blackbox_exporter
             - prometheus-discourse_forward_proxy
-            - prometheus-postgresql_exporter
             - grafana-prometheus
         command: >-
             --config.file=/app.cfg/prometheus.yaml
             --storage.tsdb.path=/prometheus
+            --storage.tsdb.retention.time=60d
             --web.console.libraries=/usr/share/prometheus/console_libraries
             --web.console.templates=/usr/share/prometheus/consoles
-            --storage.tsdb.retention.time=60d
 
     grafana:
         depends_on:
@@ -103,18 +94,20 @@ services:
         container_name: grafana
         restart: unless-stopped
         environment:
-            GF_SECURITY_ADMIN_USER: ADMIN_USER_PLACEHOLDER
-            GF_SECURITY_ADMIN_PASSWORD: ADMIN_PASS_PLACEHOLDER
+            GF_SECURITY_ADMIN_USER: ngi-monitor
+            GF_SECURITY_ADMIN_PASSWORD: Xi2KbNe_BwNLs!!8
         ports:
-            # 8443 due to restriction on ports from cloudflare
-            - 8443:3000
+        #    - external:internal
+            - 8443:<CHOOSE A PORT>
         volumes:
             - ./grafana:/etc/grafana
         networks:
+            - world
             - grafana-prometheus
             - discourse
 
 networks:
+    world:
     grafana-prometheus:
         internal: true
     prometheus-cadvisor:
@@ -126,8 +119,6 @@ networks:
     prometheus-blackbox_exporter:
         internal: true
     prometheus-discourse_forward_proxy:
-        internal: true
-    prometheus-postgresql_exporter:
         internal: true
     discourse:
         external: true
