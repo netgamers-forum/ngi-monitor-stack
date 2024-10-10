@@ -58,11 +58,23 @@ services:
             - prometheus-discourse_forward_proxy
             - discourse
 
+    # permission to write data on host
+    init_prometheus:
+      image: prom/prometheus:latest
+      user: root
+      entrypoint:
+        - /bin/sh
+        - -c
+        - chown -R 65534:65534 /prometheus
+      volumes:
+        - ./prometheus/data:/prometheus
+
     prometheus:
         depends_on:
             - cadvisor
             - node_exporter
             - discourse_forward_proxy
+            - init_prometheus
         image: prom/prometheus:latest
         restart: unless-stopped
         container_name: prometheus
