@@ -68,7 +68,7 @@ services:
         container_name: prometheus
         ports:
         #    - external:internal
-            - 9090:<CHOOSE A PORT>
+            - <CHOOSE A PORT>:9090
         volumes:
             - ./prometheus:/app.cfg
             - ./prometheus/data:/prometheus
@@ -94,11 +94,11 @@ services:
         container_name: grafana
         restart: unless-stopped
         environment:
-            GF_SECURITY_ADMIN_USER: ngi-monitor
-            GF_SECURITY_ADMIN_PASSWORD: Xi2KbNe_BwNLs!!8
+            GF_SECURITY_ADMIN_USER: <CHOOSE A USERNAME>
+            GF_SECURITY_ADMIN_PASSWORD: <CHOOSE A PASSWORD>
         ports:
         #    - external:internal
-            - 8443:<CHOOSE A PORT>
+            - <CHOOSE A PORT>:3000
         volumes:
             - ./grafana:/etc/grafana
         networks:
