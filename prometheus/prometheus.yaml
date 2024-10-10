@@ -39,10 +39,6 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 'blackbox_exporter:9115'
-  - job_name: postgres_exporter
-    static_configs:
-      - targets: 
-        - 'discourse_forward_proxy:105432'
   - job_name: discourse_exporter_proxy
     scheme: http
     static_configs:
