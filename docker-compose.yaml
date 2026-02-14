@@ -14,16 +14,18 @@ services:
         networks:
             - prometheus-cadvisor
 
-    docker_state_exporter:
-        image: karugaru/docker_state_exporter
-        container_name: docker_state_exporter
-        restart: unless-stopped
-        volumes:
-            - type: bind
-              source: /var/run/docker.sock
-              target: /var/run/docker.sock
-        networks:
-            - prometheus-docker_state_exporter
+    # ABANDONED: docker_state_exporter is not working properly, and cAdvisor already provides similar metrics
+    # Need to update Grafana dashboard to use cAdvisor metrics instead of docker_state_exporter metrics
+    # docker_state_exporter:
+    #     image: karugaru/docker_state_exporter
+    #     container_name: docker_state_exporter
+    #     restart: unless-stopped
+    #     volumes:
+    #         - type: bind
+    #           source: /var/run/docker.sock
+    #           target: /var/run/docker.sock
+    #     networks:
+    #         - prometheus-docker_state_exporter
 
     node_exporter:
         image: quay.io/prometheus/node-exporter:latest
