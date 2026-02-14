@@ -89,7 +89,7 @@ services:
         networks:
             - world
             - prometheus-cadvisor
-            - prometheus-docker_state_exporter
+            # - prometheus-docker_state_exporter
             - prometheus-node_exporter
             - prometheus-blackbox_exporter
             - prometheus-discourse_forward_proxy
@@ -126,8 +126,8 @@ networks:
         internal: true
     prometheus-cadvisor:
         internal: true
-    prometheus-docker_state_exporter:
-        internal: true
+    # prometheus-docker_state_exporter:
+    #     internal: true
     prometheus-node_exporter:
         internal: true
     prometheus-blackbox_exporter:
